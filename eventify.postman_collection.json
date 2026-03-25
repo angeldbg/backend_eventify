@@ -1,0 +1,392 @@
+{
+  "info": {
+    "name": "Eventify API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:3000/api" },
+    { "key": "token", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "AUTH",
+      "item": [
+        {
+          "name": "✅ Register - Éxito",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{base_url}}/auth/register" },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Angel García\",\n  \"email\": \"angel@gmail.com\",\n  \"password\": \"123456\"\n}"
+            }
+          }
+        },
+        {
+          "name": "❌ Register - Email duplicado",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{base_url}}/auth/register" },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Angel García\",\n  \"email\": \"angel@gmail.com\",\n  \"password\": \"123456\"\n}"
+            }
+          }
+        },
+        {
+          "name": "❌ Register - Campos vacíos",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{base_url}}/auth/register" },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\",\n  \"email\": \"\",\n  \"password\": \"\"\n}"
+            }
+          }
+        },
+        {
+          "name": "✅ Login - Éxito",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.token) pm.collectionVariables.set('token', res.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{base_url}}/auth/login" },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"angel@gmail.com\",\n  \"password\": \"123456\"\n}"
+            }
+          }
+        },
+        {
+          "name": "❌ Login - Contraseña incorrecta",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{base_url}}/auth/login" },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"angel@gmail.com\",\n  \"password\": \"wrongpassword\"\n}"
+            }
+          }
+        },
+        {
+          "name": "❌ Login - Email no existe",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{base_url}}/auth/login" },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"noexiste@gmail.com\",\n  \"password\": \"123456\"\n}"
+            }
+          }
+        },
+        {
+          "name": "✅ Profile - Éxito",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{base_url}}/auth/profile" }
+          }
+        },
+        {
+          "name": "❌ Profile - Sin token",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{base_url}}/auth/profile" }
+          }
+        },
+        {
+          "name": "❌ Profile - Token inválido",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer tokeninvalido123" }],
+            "url": { "raw": "{{base_url}}/auth/profile" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "ARTISTS",
+      "item": [
+        {
+          "name": "✅ Crear artista - Éxito",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res._id) pm.collectionVariables.set('artistId', res._id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{base_url}}/artists" },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Bad Bunny\",\n  \"bio\": \"Artista de trap latino puertorriqueño\",\n  \"genre\": \"Trap\",\n  \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Bad_Bunny_2020.jpg/800px-Bad_Bunny_2020.jpg\"\n}"
+            }
+          }
+        },
+        {
+          "name": "❌ Crear artista - Sin nombre",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{base_url}}/artists" },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bio\": \"Sin nombre\",\n  \"genre\": \"Pop\"\n}"
+            }
+          }
+        },
+        {
+          "name": "✅ Listar artistas - Éxito",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/artists" }
+          }
+        },
+        {
+          "name": "✅ Obtener artista por ID - Éxito",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/artists/{{artistId}}" }
+          }
+        },
+        {
+          "name": "❌ Obtener artista - ID inexistente",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/artists/000000000000000000000000" }
+          }
+        },
+        {
+          "name": "❌ Obtener artista - ID malformado",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/artists/idmalformado" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "EVENTS",
+      "item": [
+        {
+          "name": "✅ Crear evento - Éxito",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res._id) pm.collectionVariables.set('eventId', res._id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{base_url}}/events" },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"artist\": \"{{artistId}}\",\n  \"title\": \"Bad Bunny World's Hottest Tour\",\n  \"date\": \"2025-08-15\",\n  \"time\": \"21:00\",\n  \"venue\": \"Estadio Santiago Bernabéu\",\n  \"city\": \"Madrid\",\n  \"country\": \"España\",\n  \"capacity\": 80000,\n  \"price\": 85.00,\n  \"tour\": \"World's Hottest Tour\",\n  \"image\": \"https://example.com/evento.jpg\"\n}"
+            }
+          }
+        },
+        {
+          "name": "❌ Crear evento - Sin artista",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{base_url}}/events" },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Evento sin artista\",\n  \"date\": \"2025-08-15\",\n  \"time\": \"21:00\",\n  \"venue\": \"Estadio\",\n  \"city\": \"Madrid\",\n  \"country\": \"España\",\n  \"capacity\": 1000,\n  \"price\": 50\n}"
+            }
+          }
+        },
+        {
+          "name": "❌ Crear evento - Sin campos obligatorios",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{base_url}}/events" },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Evento incompleto\"\n}"
+            }
+          }
+        },
+        {
+          "name": "✅ Listar eventos futuros - Éxito",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/events" }
+          }
+        },
+        {
+          "name": "✅ Obtener evento por ID - Éxito",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/events/{{eventId}}" }
+          }
+        },
+        {
+          "name": "❌ Obtener evento - ID inexistente",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/events/000000000000000000000000" }
+          }
+        },
+        {
+          "name": "✅ Eventos por artista - Éxito",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/events/artist/{{artistId}}" }
+          }
+        },
+        {
+          "name": "❌ Eventos por artista - ID inexistente",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/events/artist/000000000000000000000000" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "TICKETS",
+      "item": [
+        {
+          "name": "✅ Comprar tickets - Éxito",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res._id) pm.collectionVariables.set('ticketId', res._id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{base_url}}/tickets/buy" },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventId\": \"{{eventId}}\",\n  \"quantity\": 2\n}"
+            }
+          }
+        },
+        {
+          "name": "❌ Comprar tickets - Supera límite de 6",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{base_url}}/tickets/buy" },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventId\": \"{{eventId}}\",\n  \"quantity\": 6\n}"
+            }
+          }
+        },
+        {
+          "name": "❌ Comprar tickets - Sin token",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{base_url}}/tickets/buy" },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventId\": \"{{eventId}}\",\n  \"quantity\": 2\n}"
+            }
+          }
+        },
+        {
+          "name": "❌ Comprar tickets - Evento inexistente",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{base_url}}/tickets/buy" },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventId\": \"000000000000000000000000\",\n  \"quantity\": 2\n}"
+            }
+          }
+        },
+        {
+          "name": "✅ Mis tickets - Éxito",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{base_url}}/tickets/my-tickets" }
+          }
+        },
+        {
+          "name": "❌ Mis tickets - Sin token",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{base_url}}/tickets/my-tickets" }
+          }
+        },
+        {
+          "name": "✅ Cancelar ticket - Éxito",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{base_url}}/tickets/cancel/{{ticketId}}" }
+          }
+        },
+        {
+          "name": "❌ Cancelar ticket - ID inexistente",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{base_url}}/tickets/cancel/000000000000000000000000" }
+          }
+        },
+        {
+          "name": "❌ Cancelar ticket - Sin token",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": { "raw": "{{base_url}}/tickets/cancel/{{ticketId}}" }
+          }
+        }
+      ]
+    }
+  ]
+}
