@@ -1,0 +1,166 @@
+/* Variables de color */
+:root {
+    --primary: #7247ff;
+    --secondary: #2ed573;
+    --dark: #1a1a1a;
+    --light: #f4f4f4;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--dark);
+    color: white;
+    scroll-behavior: smooth;
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.nav-links a:hover { color: var(--primary); }
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.titulo-gigante { font-size: 4rem; margin: 0; text-transform: uppercase; color: var(--primary); }
+
+/* Tickets Grid */
+.container { padding: 100px 20px; text-align: center; }
+
+.tickets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+.ticket-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: transform 0.3s;
+}.contacto-section {
+    background: #111;
+    padding-bottom: 100px;
+}
+
+.contacto-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.contacto-form {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contacto-form input, .contacto-form textarea {
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    background: #222;
+    color: white;
+    font-size: 1rem;
+}
+
+.info-soporte {
+    flex: 1;
+    background: var(--primary);
+    padding: 30px;
+    border-radius: 20px;
+    color: white;
+}
+
+.btn-enviar {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-enviar:hover {
+    filter: brightness(1.2);
+}
+
+#form-status {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.redes-sociales {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.ticket-card:hover { transform: translateY(-10px); background: rgba(255, 255, 255, 0.15); }
+
+.precio { font-size: 2rem; color: var(--secondary); font-weight: bold; }
+
+/* Controles */
+.controles { margin: 20px 0; display: flex; justify-content: center; align-items: center; gap: 15px; }
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-comprar {
+    background: var(--secondary);
+    color: white;
+    font-size: 1.5rem;
+    padding: 15px 50px;
+    margin-top: 20px;
+}
+
+.resumen-compra {
+    margin-top: 50px;
+    padding: 30px;
+    border-top: 2px solid var(--primary);
+}
