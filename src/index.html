@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rawayana Tour 2026</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">RAWAYANA</div>
+        <ul class="nav-links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#tickets">Tickets</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <header id="inicio" class="hero">
+        <div class="hero-content">
+            <h1 class="titulo-gigante">¿Quién trae las cornetas?</h1>
+            <p>Vive la experiencia en vivo del Tour 2026</p>
+            <a href="#tickets" class="btn-scroll">Ver Entradas</a>
+        </div>
+    </header>
+
+    <section id="tickets" class="container">
+        <h2 class="section-title">Selecciona tus entradas</h2>
+        <div class="tickets-grid">
+            
+            <div class="ticket-card" data-precio="50">
+                <h3>General</h3>
+                <p class="precio">€50</p>
+                <div class="controles">
+                    <button onclick="actualizarTicket(this, -1)">-</button>
+                    <span class="cantidad">0</span>
+                    <button onclick="actualizarTicket(this, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="ticket-card" data-precio="120">
+                <h3>VIP Lounge</h3>
+                <p class="precio">€120</p>
+                <div class="controles">
+                    <button onclick="actualizarTicket(this, -1)">-</button>
+                    <span class="cantidad">0</span>
+                    <button onclick="actualizarTicket(this, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="ticket-card" data-precio="250">
+                <h3>Platinum</h3>
+                <p class="precio">€250</p>
+                <div class="controles">
+                    <button onclick="actualizarTicket(this, -1)">-</button>
+                    <span class="cantidad">0</span>
+                    <button onclick="actualizarTicket(this, 1)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="resumen-compra">
+            <h2 id="total-general">Total: €0</h2>
+            <button class="btn-comprar" onclick="procesarCompra()">Finalizar Compra</button>
+        </div>
+    </section>
+    <section id="contacto" class="container contacto-section">
+    <h2 class="section-title">Contáctanos</h2>
+    <div class="contacto-wrapper">
+        
+        <form id="contact-form" class="contacto-form" onsubmit="validarFormulario(event)">
+            <input type="text" id="nombre" placeholder="Nombre completo" required>
+            <input type="email" id="email" placeholder="Correo electrónico" required>
+            <textarea id="mensaje" rows="5" placeholder="¿En qué podemos ayudarte?" required></textarea>
+            <button type="submit" class="btn-enviar">Enviar Mensaje</button>
+            <p id="form-status"></p>
+        </form>
+
+        <div class="info-soporte">
+            <h3>Información del Evento</h3>
+            <p>📍 <strong>Lugar:</strong> Estadio Metropolitano, Madrid.</p>
+            <p>📅 <strong>Fecha:</strong> 15 de Julio, 2026</p>
+            <p>📧 <strong>Soporte:</strong> ayuda@rawayana.com</p>
+            <div class="redes-sociales">
+                <span>Instagram</span> | <span>Twitter</span> | <span>TikTok</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <script src="script.js"></script>
+</body>
+</html>
