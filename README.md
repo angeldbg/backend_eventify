@@ -108,10 +108,6 @@ Su funcion es aislar la parte de acceso a MongoDB del resto de la aplicacion.
 
 Es el punto de entrada principal del backend. Desde aqui se configura Express, se cargan los middlewares, se conecta la base de datos, se cargan las rutas y se inicia el servidor.
 
-### `eventify.postman_collection.json`
-
-Es una coleccion de Postman pensada para probar la API de forma mas comoda durante el desarrollo.
-
 ### Archivos `index.html`, `script.js`, `style.css` y recursos en `src`
 
 Estos archivos aparecen dentro del proyecto actual como apoyo visual o de pruebas realizadas durante el desarrollo. No forman la parte principal de la API, pero los mantengo porque me han servido en distintas fases del proyecto.
